@@ -1,25 +1,12 @@
 class Solution(object):
     def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        n = len(s)
-        if n % 2 != 0:
-            return False
-
         stack = []
-        dic = {'(':')','{':'}','[':']'}
-        for i in s:
-            if i in dic:
-                stack.append(i)
-            else:
-                top = stack.pop()
-                if dic[top] != i:
+        mapping = {')': '(', '}': '{', ']': '['}
+        for char in s:
+            if char in mapping:
+                if not stack or stack.pop() != mapping[char]:
                     return False
-        if stack:
-            return False
-        return True
-
-s = Solution()
-print(s.isValid('[]'))
+            else:
+                stack.append(char)
+        
+        return not stack
