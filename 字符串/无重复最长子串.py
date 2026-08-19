@@ -6,16 +6,13 @@ class Solution(object):
         """
         d = dict()
         max_len = 0
-        left = 0
+        left = 0  
+        
         for i in range(len(s)):
             ch = s[i]
-            if ch in d and i > left:
+            if ch in d and d[ch] >= left:
                 left = d[ch] + 1
             d[ch] = i
-            max_len = max(max_len,i - left + 1)
-
+            max_len = max(max_len, i - left + 1)
+        
         return max_len
-
-s = Solution()
-res = s.lengthOfLongestSubstring("abcabcbb")
-print(res)
